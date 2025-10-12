@@ -1,0 +1,26 @@
+:root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--muted:#6b7280}
+*{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+body{margin:0;background:var(--bg);color:#0f172a}
+.app{max-width:1100px;margin:18px auto;padding:18px}
+header{display:flex;flex-direction:column;gap:6px}
+h1{margin:0;color:var(--accent)}
+.tag{margin:0;color:var(--muted)}
+.controls{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
+.prefs, .quick{background:var(--card);padding:12px;border-radius:8px;box-shadow:0 1px 3px rgba(2,6,23,0.06)}
+.prefs label, .quick input{display:inline-block;margin-right:8px}
+.prefs input, .prefs select, .quick input{padding:6px;border-radius:6px;border:1px solid #e5e7eb}
+button{background:var(--accent);color:#fff;padding:8px 10px;border:0;border-radius:6px;cursor:pointer}
+.results{display:flex;gap:12px;margin-top:12px}
+.left{flex:1}
+.right{width:420px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--card);padding:10px;border-radius:8px;box-shadow:0 1px 2px rgba(2,6,23,0.04)}
+.card h3{margin:0 0 6px 0}
+.price{font-weight:700;color:#0b5b2d}
+.panel{background:var(--card);padding:10px;border-radius:8px;min-height:120px;box-shadow:0 1px 2px rgba(2,6,23,0.04);margin-top:8px}
+.chat{margin-top:16px}
+.chatWindow{background:#fff;padding:12px;border-radius:8px;height:180px;overflow:auto;border:1px solid #e6eef8}
+.chatWindow .bot{background:#eef2ff;padding:8px;border-radius:8px;margin:6px 0;display:inline-block}
+.chatWindow .user{background:#e6ffef;padding:8px;border-radius:8px;margin:6px 0;display:inline-block;align-self:flex-end}
+.chatInput{display:flex;gap:8px;margin-top:8px}
+footer{margin-top:18px;color:var(--muted);font-size:14px;text-align:center}
