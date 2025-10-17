@@ -15,4 +15,4 @@ How to use:
 Notes:
 - This is a front-end prototype with mock/sample data. To turn it into a real AI assistant, you'll need a back-end (server),
   product APIs or web-scraping for live prices, and a real NLP/LLM service for analysis.
-- I can help integrate a backend and real APIs next if you'd like.
+- I can help integrate a backend and real APIs next if you'd like.# redeploy test
