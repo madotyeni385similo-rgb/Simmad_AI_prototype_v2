@@ -1,49 +1,33 @@
-from flask import Flask, render_template_string, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import openai
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', static_url_path='')
 
-# Load OpenAI API key from environment
+# Set OpenAI API key from environment variable
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/')
-def home():
-    return render_template_string("""
-        <h1>Welcome to Simmad AI Prototype 🚀</h1>
-        <p>Your app is running successfully on Render!</p>
-        <textarea id="userInput" placeholder="Type your message here..." rows="3" cols="40"></textarea><br>
-        <button onclick="sendMessage()">Send</button>
-        <p><strong>AI:</strong> <span id="response"></span></p>
+def index():
+    # Serve the main HTML page
+    return send_from_directory('.', 'index.html')
 
-        <script>
-        async function sendMessage() {
-            const userText = document.getElementById('userInput').value;
-            const response = await fetch('/ask', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: userText })
-            });
-            const data = await response.json();
-            document.getElementById('response').textContent = data.reply;
-        }
-        </script>
-    """)
-
-@app.route('/ask', methods=['POST'])
-def ask():
-    user_message = request.json.get("message", "")
-    
-    if not user_message:
-        return jsonify({"reply": "Please enter a message."})
-
+@app.route('/chat', methods=['POST'])
+def chat():
     try:
-        completion = openai.ChatCompletion.create(
+        data = request.get_json()
+        user_message = data.get("message", "")
+        if not user_message:
+            return jsonify({"reply": "Please enter a message."})
+
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": user_message}]
         )
-        ai_reply = completion.choices[0].message["content"]
+
+        ai_reply = response.choices[0].message["content"].strip()
         return jsonify({"reply": ai_reply})
+
     except Exception as e:
         return jsonify({"reply": f"Error: {str(e)}"})
 
